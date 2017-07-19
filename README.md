@@ -38,7 +38,7 @@ When a new script is added, please alter this readme to include the script name 
 `git push origin master`
 
 
-#### CONUS VRT Manipulation 
+### CONUS VRT Manipulation 
 
 **spatial_subset_conus_vrt_by_geojson.py**
 
@@ -47,5 +47,15 @@ When a new script is added, please alter this readme to include the script name 
 *Date added:* 2017/07/19
 
 *Description:* This script will subset/clip CONUS VRT files by a geojson file. The parameters are hard-coded. It is expecting certain VRT files to exist and is intended to work only on a pre-defined set of VRTs. For these reasons it is not a very flexible script, but could be made more generic by giving it glob-type search terms for the VRTs you want subset or provide full paths and output names.
+
+### Image Spatial Segmentation 
+
+**scikit-image_seg_test.py**
+
+*Author:* Justin
+
+*Date added:* 2017/07/19
+
+*Description:* This script will spatially segment an image using the scikit-image library.  **NEED TO FILL OUT MORE**
 
 
