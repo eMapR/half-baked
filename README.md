@@ -4,7 +4,9 @@ A collection of one-off, messy, or hard-coded scripts that could be useful down 
 When a new script is added, please alter this readme to include the script name under a broad category and provide a brief description of its purpose and any particularly useful tidbits that would help someone else run it or what could be changed to make it full-baked.
 
 [CONUS VRT Manipulation](#conVRTman)
+
 [Image Spatial Segmentation](#spatialSeg)
+
 [Videos](#videos)
 
 **To add scripts to the repository:**
