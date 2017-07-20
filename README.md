@@ -3,6 +3,10 @@ A collection of one-off, messy, or hard-coded scripts that could be useful down 
 
 When a new script is added, please alter this readme to include the script name under a broad category and provide a brief description of its purpose and any particularly useful tidbits that would help someone else run it or what could be changed to make it full-baked.
 
+[CONUS VRT Manipulation](#conVRTman)
+[Image Spatial Segmentation](#spatialSeg)
+[Videos](#videos)
+
 **To add scripts to the repository:**
 
 1. Make sure script file is in the /vol/v1/general_files/script_library/half-baked/ dir
@@ -38,7 +42,7 @@ When a new script is added, please alter this readme to include the script name 
 `git push origin master`
 
 
-### CONUS VRT Manipulation 
+### <a id="conVRTman"></a>CONUS VRT Manipulation 
 
 **spatial_subset_conus_vrt_by_geojson.py**
 
@@ -48,7 +52,7 @@ When a new script is added, please alter this readme to include the script name 
 
 *Description:* This script will subset/clip CONUS VRT files by a geojson file. The parameters are hard-coded. It is expecting certain VRT files to exist and is intended to work only on a pre-defined set of VRTs. For these reasons it is not a very flexible script, but could be made more generic by giving it glob-type search terms for the VRTs you want subset or provide full paths and output names.
 
-### Image Spatial Segmentation 
+### <a id="spatialSeg"></a>Image Spatial Segmentation 
 
 **scikit-image_seg_test.py**
 
@@ -57,5 +61,15 @@ When a new script is added, please alter this readme to include the script name 
 *Date added:* 2017/07/19
 
 *Description:* This script will spatially segment an image using the scikit-image library.  **NEED TO FILL OUT MORE**
+
+### <a id="videos"></a>Videos
+
+**stem_nlcd_vids.py**
+
+*Author:* Justin
+
+*Date added:* 2017/08/19
+
+*Description:* This script will create videos of STEM NLCD for even years 1990 to 2000.  **NEED TO FILL OUT MORE**
 
 
