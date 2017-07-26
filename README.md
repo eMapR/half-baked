@@ -9,6 +9,8 @@ When a new script is added, please alter this readme to include the script name 
 
 [Videos](#videos)
 
+[Raster manipulation](#rasterManipulation)
+
 **To add scripts to the repository:**
 
 1. Make sure script file is in the /vol/v1/general_files/script_library/half-baked/ dir
@@ -62,7 +64,7 @@ When a new script is added, please alter this readme to include the script name 
 
 *Date added:* 2017/07/19
 
-*Description:* This script will spatially segment an image using the scikit-image library.  **NEED TO FILL OUT MORE**
+*Description:* This script will spatially segment an image using the scikit-image library. **NEED TO FILL OUT MORE**
 
 ### <a id="videos"></a>Videos
 
@@ -70,8 +72,18 @@ When a new script is added, please alter this readme to include the script name 
 
 *Author:* Justin
 
-*Date added:* 2017/08/19
+*Date added:* 2017/07/19
 
-*Description:* This script will create videos of STEM NLCD for even years 1990 to 2000.  **NEED TO FILL OUT MORE**
+*Description:* This script will create videos of STEM NLCD for even years 1990 to 2000. **NEED TO FILL OUT MORE**
+
+### <a id="rasterManipulation"></a>Raster manipulation
+
+**subset_raster_by_vector_extent.py**
+
+*Author:* Justin
+
+*Date added:* 2017/07/26
+
+*Description:* This script will subset a raster by a vector extent using OGR and gdal_translate. All parameter arguments are hardcoded. It would be helpful to add the option to clip the raster to the vector outline. **NEED TO FILL OUT MORE**
 
 
