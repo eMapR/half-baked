@@ -19,7 +19,7 @@ clipRaster = 'true'
 
 
 inDriver = ogr.GetDriverByName('GeoJSON') # this needs to be smarter so that a person can provide something besides geojson
-inDataSource = inDriver.Open(inRaster, 0)
+inDataSource = inDriver.Open(inShape, 0)
 extent = inDataSource.GetLayer().GetExtent()
 
 projwin = '-projwin {} {} {} {} '.format(extent[0], extent[3], extent[1], extent[2])  
