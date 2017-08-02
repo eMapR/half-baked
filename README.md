@@ -11,6 +11,8 @@ When a new script is added, please alter this readme to include the script name 
 
 [Raster manipulation](#rasterManipulation)
 
+[LT Processing in IDL](#ltProcessingIDL)
+
 **To add scripts to the repository:**
 
 1. Make sure script file is in the /vol/v1/general_files/script_library/half-baked/ dir
@@ -85,5 +87,16 @@ When a new script is added, please alter this readme to include the script name 
 *Date added:* 2017/07/26
 
 *Description:* This script will subset a raster by a vector extent using OGR and gdal_translate. It will also burn in a nodata value for pixels outside the bounds of the provided vector. All parameter arguments are hardcoded. Right now it only accepts geojson features - driver is hardcoded. **NEED TO FILL OUT MORE**
+
+### <a id="ltProcessingIDL"></a>LT Processing in IDL
+
+**execute_idl_runfiles_in_parallel.py**
+
+*Author:* Justin
+
+*Date added:* 2017/08/02
+
+*Description:* This script will run IDL 'run files' or 'batchfiles' in parallel. The input is a list of files paths to the IDL .pro run files you want executed. This list is entered directly into the script.
+
 
 
