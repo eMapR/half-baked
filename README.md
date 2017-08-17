@@ -52,11 +52,9 @@ When a new script is added, please alter this readme to include the script name 
 
 ### spatial_subset_conus_vrt_by_geojson.py
 
-*Author:* Justin
+This script will subset/clip CONUS VRT files by a geojson file. The parameters are hard-coded. It is expecting certain VRT files to exist and is intended to work only on a pre-defined set of VRTs. For these reasons it is not a very flexible script, but could be made more generic by giving it glob-type search terms for the VRTs you want subset or provide full paths and output names.
 
-*Date added:* 2017/07/19
-
-*Description:* This script will subset/clip CONUS VRT files by a geojson file. The parameters are hard-coded. It is expecting certain VRT files to exist and is intended to work only on a pre-defined set of VRTs. For these reasons it is not a very flexible script, but could be made more generic by giving it glob-type search terms for the VRTs you want subset or provide full paths and output names.
+Justin | 2017/07/19
 
 ## <a id="spatialSeg"></a>Image Spatial Segmentation 
 
