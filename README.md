@@ -88,6 +88,14 @@ When a new script is added, please alter this readme to include the script name 
 
 *Description:* This script will subset a raster by a vector extent using OGR and gdal_translate. It will also optionally burn in a nodata value for pixels outside the bounds of the provided vector. It recognizes .shp and .geojson vector files. All parameter arguments are hardcoded.  **NEED TO FILL OUT MORE**
 
+**check_all_rasters_same_extent.py**
+
+*Author:* Justin
+
+*Date added:* 2017/08/17
+
+*Description:* This script will search a given directory for rasters matching a specified search term and check to see if all identified rasters have the same extent. All parameter arguments are hardcoded.
+
 ### <a id="ltProcessingIDL"></a>LT Processing in IDL
 
 **execute_idl_runfiles_in_parallel.py**
