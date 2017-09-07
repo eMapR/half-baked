@@ -70,6 +70,10 @@ This script will spatially segment an image using the scikit-image library. Just
 
 This script will create videos of STEM NLCD for even years 1990 to 2000. Justin, 2017/07/19 **NEED TO FILL OUT MORE**
 
+### stem_nlcd_vids_leaflet.py
+
+This script will create videos of STEM NLCD for even years 1990 to 2000 that can be used as a layer in JS webmap library Leaflet. Justin, 2017/09/06 **NEED TO FILL OUT MORE**
+
 ### make_tc_rgb_video.py
 
 This script will create videos of Tasselled Cap brightness, greenness, wetness RGB composite time series. Justin, 2017/09/06 **NEED TO FILL OUT MORE**
