@@ -82,6 +82,9 @@ This script will subset a raster by a vector extent using OGR and gdal_translate
 
 This script will search a given directory for rasters matching a specified search term and check to see if all identified rasters have the same extent. All parameter arguments are hardcoded. Justin, 2017/08/17
 
+### make_3_band_rgb_composite.py
+
+This script will take a time series raster stack of fitted index imagery, like fitted NBR or fitted TC wetness, for example, and create a 3-band RGB composite for quick viewing of change through time. It allows you to select a projection for the composite and optionally generate web tiles for interactive webmap applications. All parameter arguments are hardcoded. Justin, 2017/09/06
 
 
 ## <a id="ltProcessingIDL"></a>LT Processing in IDL
