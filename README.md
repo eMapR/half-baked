@@ -91,7 +91,11 @@ This script will search a given directory for rasters matching a specified searc
 
 ### make_3_band_rgb_composite.py
 
-This script will take a time series raster stack of fitted index imagery, like fitted NBR or fitted TC wetness, for example, and create a 3-band RGB composite for quick viewing of change through time. It allows you to select a projection for the composite and optionally generate web tiles for interactive webmap applications. All parameter arguments are hardcoded. Justin, 2017/09/06 **NEED TO ADD ABILITY TO DEFINE SUBSET AND ALLOW USER-DEFINED SCALING LIMITS**
+This script will take a time series raster stack of fitted index imagery, like fitted NBR or fitted TC wetness, for example, and create a 3-band RGB composite for quick viewing of change through time. It allows you to select a projection for the composite and optionally generate web tiles for interactive webmap applications. All parameter arguments are hardcoded. Justin, 2017/09/06 **NEED TO ADD ABILITY TO DEFINE SUBSET AND ALLOW USER-DEFINED SCALING LIMITS-THIS MAY BE DONE-NEED TO CHECK**
+
+### make_tc_rgb_composite.py
+
+This script will create an 8-bit RGB image of Tasselled Cap brightness, greenness, and wetness scaled to a standard stretch for a single annual time period. It allows you to select a projection for the composite and optionally generate web tiles for interactive webmap applications. All parameter arguments are hardcoded. Justin, 2017/09/19 **NEED TO ADD ABILITY TO DEFINE SUBSET AND ALLOW USER-DEFINED SCALING LIMITS-ALSO NEED TO IMPLEMENT THE SAME PRE-PROJECTION LAYER SUBSETTING USED IN make_3_band_rgb_composite.py**
 
 
 ## <a id="ltProcessingIDL"></a>LT Processing in IDL
