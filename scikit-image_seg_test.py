@@ -11,8 +11,14 @@ from skimage import segmentation, color, io
 from skimage.future import graph
 from skimage.segmentation import mark_boundaries
 from matplotlib import pyplot as plt
+from osgeo import gdal
+import os
 
-
+"""
+references
+RAG: https://vcansimplify.wordpress.com/2014/07/06/scikit-image-rag-introduction/
+hierarchical merging: http://scikit-image.org/docs/dev/auto_examples/segmentation/plot_boundary_merge.html
+"""
 
 def weight_mean_color(graph, src, dst, n):
   """Callback to handle merging nodes by recomputing mean color.
@@ -69,6 +75,7 @@ def make_display_image(img, bgPixels):
   bgPixels : np.array
       np.array of indexes for background pixels
   """
+  img = img.astype(np.float)
   img[bgPixels] = np.nan
   imgMean = np.nanmean(img)
   imgStd = np.nanstd(img)
@@ -82,59 +89,96 @@ def make_display_image(img, bgPixels):
   imgMax = imgMean+(imgStd*2)
   img[img < imgMin] = imgMin
   img[img > imgMax] = imgMax
-  img = np.round( ( (img-imgMin) / (imgMax-imgMin+0.0) ) *255).astype(np.uint8)
+  img = np.round(((img-imgMin) / (imgMax-imgMin+0.0)) * 255).astype(np.uint8)
   return img
 
-# activate the gdal plugin
-io.use_plugin('gdal')
 
-# define the image filename
-fn = '/vol/v1/proj/cmonster/lidar/lt_lidar_comparison/aggregated/rasters/hja_lidar_biomass_reproject_nearest_masked_1x1.bsq'
+############################################################################################################################################################
+###   INPUTS    ############################################################################################################################################
+############################################################################################################################################################
 
-# set background value
+
+# define the image file path
+inFile = '/vol/v1/proj/cmonster/lidar/lt_lidar_comparison/aggregated/rasters/hja_lidar_biomass_reproject_nearest_masked_1x1.bsq'
+
+# define the out file name - if extension is not .tif, it will be forced to .tif
+outFile = '/vol/v1/general_files/user_files/justin/temp/spatial_seg/label_img.bsq'
+
+# set background value - what is it in the image?
 bgValue = -9999
 
+
+############################################################################################################################################################
+############################################################################################################################################################
+############################################################################################################################################################
+
+
+
+# activate the GDAL plugin so that skimage will read GeoTIFF
+io.use_plugin('gdal')
+
 # read in the image
-img = io.imread(fn)
+img = io.imread(inFile)
 
 # get the index of the background pixels
 bgPixels = np.where(img == bgValue)
 
 # create the display image
 displyImg = make_display_image(img, bgPixels)
+
+# plot the display image
 plt.imshow(displyImg, cmap='gray')
 
-# create the image to segment
+# create the image to segment - set background NA values -100 and scale data froom 0-600 - iterative testing
 img[bgPixels] = -100
-img = np.round( ( (img-np.min(img)) / (np.max(img)-np.min(img)+0.0) ) * 600)
+img = np.round(((img-np.min(img)) / (np.max(img)-np.min(img)+0.0)) * 600)
 
-# use k-means to segment the image
-seg1 = segmentation.slic(img, compactness=110, n_segments=4000)
+# use k-means to perform an initial segmentation of the image - need to play with the values, use next section to evaluate
+imgKmeans = segmentation.slic(img, compactness=110, n_segments=4000)
 
 # compare the original image to the initial segmentation
-labels1Ave = color.label2rgb(seg1, img, kind='avg')
-fig, (ax0, ax1) = plt.subplots(1, 2 ,figsize=(20,10),dpi=72)
+kMeansLabelsAve = color.label2rgb(imgKmeans, img, kind='avg')
+fig, (ax0, ax1) = plt.subplots(1, 2 ,figsize=(20,10), dpi=72)
 ax0.imshow(img, cmap='gray')
-ax1.imshow(labels1Ave)
+ax1.imshow(kMeansLabelsAve)
 ax0.axis('off')
 ax1.axis('off')
 
 
-#
-g = graph.rag_mean_color(img, seg1)
+# create a region adjacency graph for the k-mean clustered image
+rag = graph.rag_mean_color(img, imgKmeans)
 
-labels2 = graph.merge_hierarchical(seg1, g, thresh=150, rag_copy=False,  #100
-                                   in_place_merge=True,
-                                   merge_func=merge_mean_color,
-                                   weight_func=weight_mean_color)
+# merge similar clusters together
+imgLabels = graph.merge_hierarchical(imgKmeans, rag, thresh=150, rag_copy=False,
+                                     in_place_merge=True,
+                                     merge_func=merge_mean_color,
+                                     weight_func=weight_mean_color)
 
-labels2[bgPixels] = labels2[0,0]
+imgLabels[bgPixels] = imgLabels[0,0]
 
-
+# plot the result as an overlay on the display image
 plt.figure(1,figsize=(10,10),dpi=72)
-plt.imshow(mark_boundaries(displyImg, labels2))
+plt.imshow(mark_boundaries(displyImg, imgLabels))
 
 
+# write out the labeled segmentation image
+src = gdal.Open(inFile)
+driver = gdal.GetDriverByName('GTiff')
+labelMax = np.max(imgLabels)
 
+if labelMax <= 255:
+  dataType = 1
+elif labelMax <= 65535:
+  dataType = 2
+elif labelMax <= 4294967295:
+  dataType = 4
+
+outFile = os.path.splitext(outFile)[0]+'.tif'
+outImg = driver.Create(outFile, src.RasterXSize, src.RasterYSize, 1, dataType) # file, col, row, nBands, dataTypeCode
+outImg.SetGeoTransform(src.GetGeoTransform())
+outImg.SetProjection(src.GetProjection())
+outBand = outImg.GetRasterBand(1) 
+outBand.WriteArray(imgLabels)
+outImg = None
 
 
